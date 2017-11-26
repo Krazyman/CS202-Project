@@ -1,0 +1,26 @@
+import java.awt.Graphics;
+import java.awt.Color;
+
+public class Enemy extends GameObject {
+  
+  public Enemy(int x, int y, ID id) {
+   super(x, y, id); 
+   
+   velY = 1;
+   velX =(int) Math.cos(Game.time)*8;
+  }
+  
+  public void update() {
+    x += velX;
+    y += velY;
+    
+    x = Game.clamp(x, 0, Game.WIDTH-32);
+    y = Game.clamp((int)y, 0, Game.HEIGHT - 48);
+  }
+  
+  public void draw(Graphics g) {
+    g.setColor(Color.red);
+    g.fillRect(x, y, 16, 16);
+  }
+  
+}

@@ -1,0 +1,30 @@
+import java.awt.Canvas;
+import java.awt.image.BufferStrategy;
+import java.awt.Graphics;
+import java.awt.Color;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import java.io.File;
+
+public class MainGame extends Canvas implements Runnable{
+    
+
+	// public enum STATE {
+	// 	Menu, 
+	// 	Game,
+	// 	Win, 
+	// 	Lose
+	// };
+
+	// public STATE gameState = STATE.Menu;
+
+
+	public MainGame() {
+
+		background = new Background();
+		// this.addKeyListener(new KeyInput(handler));
+		new Window("SpaceShooter", this);
+
+	}
+}
