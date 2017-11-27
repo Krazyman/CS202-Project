@@ -80,4 +80,15 @@ public class Spawn {
       }
     }
   }
+  
+  public void despawnLaser() {
+     for(int i=0; i<handler.object.size(); i++) {
+      GameObject tempObject = handler.object.get(i);
+      if(tempObject.getId() == ID.Laser) {
+       if (tempObject.getY() < 0)  {
+          handler.removeObject(tempObject); 
+        }
+      }
+    }
+  }
 }

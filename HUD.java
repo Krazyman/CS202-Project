@@ -32,6 +32,7 @@ public class HUD {
     
     if (BULLET == 0 && count !=0 ){
       BULLET = 100;
+      count--;
     }
     
     
@@ -56,29 +57,29 @@ public class HUD {
    // boss health 1
    g.setColor(Color.gray);
    g.fillRect(550, 15, 200, 32);
-   g.setColor(new Color(redValue, 0, 0));
-   g.fillRect(550, 15, BOSS5*2, 32);
+   g.setColor(new Color(value1, 0, 0));
+   g.fillRect(550, 15, BOSS1*2, 32);
    g.setColor(Color.white);
    g.drawRect(550, 15, 200, 32);
    // boss health 2
    g.setColor(Color.gray);
    g.fillRect(550, 15, 200, 32);
-   g.setColor(new Color(redValue, 0, 0));
-   g.fillRect(550, 15, BOSS5*2, 32);
+   g.setColor(new Color(redValue, value2, 0));
+   g.fillRect(550, 15, BOSS2*2, 32);
    g.setColor(Color.white);
    g.drawRect(550, 15, 200, 32);
    // boss health 3
    g.setColor(Color.gray);
    g.fillRect(550, 15, 200, 32);
-   g.setColor(new Color(redValue, 0, 0));
-   g.fillRect(550, 15, BOSS5*2, 32);
+   g.setColor(new Color(redValue, 0, value3));
+   g.fillRect(550, 15, BOSS3*2, 32);
    g.setColor(Color.white);
    g.drawRect(550, 15, 200, 32);
    // boss health 4
    g.setColor(Color.gray);
    g.fillRect(550, 15, 200, 32);
-   g.setColor(new Color(redValue, 0, 0));
-   g.fillRect(550, 15, BOSS5*2, 32);
+   g.setColor(new Color(0, 0, value4));
+   g.fillRect(550, 15, BOSS4*2, 32);
    g.setColor(Color.white);
    g.drawRect(550, 15, 200, 32);
    // boss health 5
