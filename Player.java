@@ -41,7 +41,7 @@ public class Player extends GameObject {
      
      if(tempObject.getId() == ID.Enemy) {
        if(getBounds().intersects(tempObject.getBounds())) {
-         HUD.HEALTH -= 50;
+         HUD.HEALTH -= 25;
        } 
      }
     }
@@ -63,7 +63,9 @@ public class Player extends GameObject {
   public void death() {
     if (HUD.HEALTH <= 0) {
       for (int i=0; i<25; i++) {
-       handler.addObject(new Explosion(x, y, ID.Explosion)); 
+       handler.addObject(new Explosion(x-i, y+i, ID.Explosion));
+       handler.addObject(new Explosion(x+i, y-i, ID.Explosion));
+       handler.addObject(new Explosion(x, y, ID.Explosion));
       }
      handler.removeObject(this); 
     }
