@@ -21,6 +21,11 @@ public class HUD {
   public void update() {   
     HEALTH = Game.clamp(HEALTH, 0, 100);
     BULLET = Game.clamp(BULLET, 0, 100);
+    BOSS1 = Game.clamp(BOSS1, 0, 100);
+    BOSS2 = Game.clamp(BOSS2, 0, 100);
+    BOSS3 = Game.clamp(BOSS3, 0, 100);
+    BOSS4 = Game.clamp(BOSS4, 0, 100);
+    BOSS5 = Game.clamp(BOSS5, 0, 100);
     greenValue = HEALTH * 2;
     blueValue = BULLET * 2;
     value1 = BOSS1 * 2;
@@ -49,8 +54,6 @@ public class HUD {
 
    g.setColor(Color.gray);
    g.fillRect(550, 15, 200, 32);
-   g.setColor(Color.white);
-   g.drawRect(15, 50, 200, 32);
    // boss health 5
    g.setColor(new Color(redValue, 0, 0));
    g.fillRect(550, 15, BOSS5*2, 32);
@@ -66,6 +69,8 @@ public class HUD {
    // boss health 1   
    g.setColor(new Color(value1, 0, 0));
    g.fillRect(550, 15, BOSS1*2, 32);
+   g.setColor(Color.white);
+   g.drawRect(15, 50, 200, 32);
    
    Font clock = new Font("century gothic" , 1, 50);
    String timer = String.format("%.2f",Game.time/120);

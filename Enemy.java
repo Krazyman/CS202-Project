@@ -17,11 +17,8 @@ public class Enemy extends GameObject {
     x += Math.cos(-Game.time*.0025)*8 + 0.5;
     y += velY;
     
-    x = Game.clamp(x, 0, Game.WIDTH-32);
-    
-    if (y>=Game.HEIGHT) {
-     System.out.println("gg"); 
-    }
+    x = Game.clamp(x, 0, Game.WIDTH-128);
+
   }
   
   public void draw(Graphics g) {
