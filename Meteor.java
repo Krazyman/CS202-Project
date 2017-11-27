@@ -11,7 +11,7 @@ public class Meteor extends GameObject{
   public Meteor(int x, int y, ID id) {
    super(x, y, id);
    
-   velY = 5;
+   velY = 3;
   }
   
   public void update() {
@@ -25,11 +25,10 @@ public class Meteor extends GameObject{
     Graphics2D g2d = (Graphics2D) g;     
     Image img1 = Toolkit.getDefaultToolkit().getImage("64Meteor.png");
     g.drawImage(img1, x, y, null);
-    //g.setColor(Color.gray);
-   //g.fillRect(x, y, 16, 16);
   }
   
   public Rectangle getBounds() {
     return new Rectangle(x, y, 48, 48); 
   } 
 }
+

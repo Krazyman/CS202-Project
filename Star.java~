@@ -6,14 +6,14 @@ public class Star extends GameObject{
   public Star(int x, int y, ID id) {
    super(x, y, id);
    
-   velY = -1;
+   velY = -5;
   }
   
   public void update() {
     x += velX;
     y += velY;
     
-    x = Game.clamp(x, HEIGHT, Game.WIDTH-32);
+    x = Game.clamp(x, 0, Game.WIDTH-32);
   }
   
   public void draw(Graphics g) {

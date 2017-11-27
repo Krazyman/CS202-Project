@@ -10,10 +10,7 @@ public class HUD {
   
   public void update() {   
     HEALTH = Game.clamp(HEALTH, 0, 100);
-//    greenValue = Game.clamp(greenValue, 0, 255);
-//    
     greenValue = HEALTH * 2;
-//    
   }
   
   public void draw(Graphics g) {

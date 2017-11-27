@@ -6,7 +6,7 @@ public class Enemy extends GameObject {
   public Enemy(int x, int y, ID id) {
    super(x, y, id); 
    
-   velY = 5;
+   velY = 1;
    //velX =(int) Math.cos(Game.time)*8;
   }
   

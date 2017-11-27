@@ -6,7 +6,7 @@ public class Star extends GameObject{
   public Star(int x, int y, ID id) {
    super(x, y, id);
    
-   velY = -5;
+   velY = 5;
   }
   
   public void update() {

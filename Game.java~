@@ -14,6 +14,10 @@ public class Game extends Canvas implements Runnable{
   
   public Thread thread;
   private boolean running = false;
+<<<<<<< HEAD
+=======
+  public static boolean shot;
+>>>>>>> f3987e1038c79e72de499eef2c4f137bfad222ce
   
   private Random r; // just to test
   private Handler handler;
@@ -60,12 +64,21 @@ public class Game extends Canvas implements Runnable{
     long timer = System.currentTimeMillis();
     int frames = 0;
     while(running){
+<<<<<<< HEAD
      if(time%0.125 == 0) {
      spawnMeteor(2);
       }
      despawnMeteor(); 
      System.out.println(handler.object.size());
      time += 0.025;
+=======
+     if(time%50 == 0) {
+     spawnMeteor(2);
+      }
+     despawnMeteor(); 
+     //System.out.println(handler.object.size());
+     time += 1;
+>>>>>>> f3987e1038c79e72de499eef2c4f137bfad222ce
      long now = System.nanoTime();
      delta += (now - lastTime) /ns;
      lastTime = now;
@@ -127,7 +140,12 @@ public class Game extends Canvas implements Runnable{
   
   public void spawnMeteor(int num) {
     for(int i=0; i<num; i++) {
+<<<<<<< HEAD
      handler.addObject(new Meteor(r.nextInt(WIDTH), 0, ID.Meteor)); 
+=======
+     handler.addObject(new Meteor(r.nextInt(WIDTH), 0, ID.Meteor));
+     handler.addObject(new Star(r.nextInt(WIDTH), HEIGHT, ID.Star));
+>>>>>>> f3987e1038c79e72de499eef2c4f137bfad222ce
     }
   }
   
@@ -138,9 +156,20 @@ public class Game extends Canvas implements Runnable{
      if(tempObject.getId() == ID.Meteor) {
        if (tempObject.getY() > HEIGHT)  {
         handler.removeObject(tempObject); 
+<<<<<<< HEAD
+=======
+       } 
+     }
+     if(tempObject.getId() == ID.Star) {
+       if (tempObject.getY() < 0)  {
+        handler.removeObject(tempObject); 
+>>>>>>> f3987e1038c79e72de499eef2c4f137bfad222ce
        }
      }
     }
   }
+<<<<<<< HEAD
   
+=======
+>>>>>>> f3987e1038c79e72de499eef2c4f137bfad222ce
 }

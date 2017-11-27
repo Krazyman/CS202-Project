@@ -33,7 +33,6 @@ public class Game extends Canvas implements Runnable{
 
     r= new Random(); // just to test
     handler.addObject(new Player(WIDTH/2, HEIGHT/2, ID.Player, handler));
-    //handler.addObject(new Enemy(WIDTH/2, 0, ID.Enemy));
 
     
   }
@@ -61,11 +60,10 @@ public class Game extends Canvas implements Runnable{
     long timer = System.currentTimeMillis();
     int frames = 0;
     while(running){
-     if(time%50 == 0) {
+     if(time%500 == 0) {
      spawnMeteor(2);
       }
      despawnMeteor(); 
-     //System.out.println(handler.object.size());
      time += 1;
      long now = System.nanoTime();
      delta += (now - lastTime) /ns;
@@ -130,7 +128,7 @@ public class Game extends Canvas implements Runnable{
   public void spawnMeteor(int num) {
     for(int i=0; i<num; i++) {
      handler.addObject(new Meteor(r.nextInt(WIDTH), 0, ID.Meteor));
-     handler.addObject(new Star(r.nextInt(WIDTH), HEIGHT, ID.Star));
+     handler.addObject(new Star(r.nextInt(WIDTH), 0, ID.Star));
     }
   }
   
@@ -144,7 +142,7 @@ public class Game extends Canvas implements Runnable{
        } 
      }
      if(tempObject.getId() == ID.Star) {
-       if (tempObject.getY() < 0)  {
+       if (tempObject.getY() > HEIGHT)  {
         handler.removeObject(tempObject); 
        }
      }
