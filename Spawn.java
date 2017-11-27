@@ -18,6 +18,7 @@ public class Spawn {
     despawnStar();
     if (Game.time%50 == 0) {spawnMeteor(15);}
     despawnMeteor();
+    despawnExplosion();
   }
   
   public void spawnMeteor(int num) {
@@ -49,6 +50,17 @@ public class Spawn {
       GameObject tempObject = handler.object.get(i);
       if(tempObject.getId() == ID.Star) {
         if (tempObject.getY() > Game.HEIGHT)  {
+          handler.removeObject(tempObject); 
+        }
+      }
+    }
+  }
+  
+  public void despawnExplosion() {
+    for(int i=0; i<handler.object.size(); i++) {
+      GameObject tempObject = handler.object.get(i);
+      if(tempObject.getId() == ID.Explosion) {
+        if (Game.time%50==0)  {
           handler.removeObject(tempObject); 
         }
       }

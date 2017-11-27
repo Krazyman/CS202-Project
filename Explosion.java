@@ -7,8 +7,6 @@ public class Explosion extends GameObject{
   
   public Explosion(int x, int y, ID id) {
    super(x, y, id);
-   
-   velY = 5;
   }
   
   public void update() {
