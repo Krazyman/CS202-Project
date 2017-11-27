@@ -1,18 +1,12 @@
 import java.awt.*;
-import java.awt.Rectangle;
 
-public class Player extends GameObject {
+public class Laser extends GameObject{
+ private Handler handler;
   
-  Handler handler;
-  
-  public Player(int x, int y, ID id, Handler handler) {
-   super(x, y, id); 
+  public Laser(int x, int y, ID id, Handler handler) {
+   super(x, y, id);
    this.handler = handler;
-   
-  }
-  
-  public Rectangle getBounds() {
-   return new Rectangle(x, y, 64, 64); 
+   velY = -3;
   }
   
   public void update() {
@@ -20,11 +14,7 @@ public class Player extends GameObject {
     y += velY;
     
     x = Game.clamp(x, 0, Game.WIDTH-32);
-    y = Game.clamp((int)y, 0, Game.HEIGHT - 96);
-    
     collision();
-    shoot();
-    
   }
   
   private void collision(){
@@ -33,22 +23,20 @@ public class Player extends GameObject {
      
      if(tempObject.getId() == ID.Meteor) {
        if(getBounds().intersects(tempObject.getBounds())) {
-         HUD.HEALTH -= 2;
          handler.removeObject(tempObject);
-       } 
+         handler.removeObject(this);
+       }
      }
     }
   }
   
-  private void shoot(){
-    if (Game.shot){
-      handler.addObject(new Laser(this.getX()+16,this.getY(),ID.Laser,handler));}
-  }
-  
   public void draw(Graphics g) {
     Graphics2D g2d = (Graphics2D) g;
-    Image img1 = Toolkit.getDefaultToolkit().getImage("64Ship.png");
+    Image img1 = Toolkit.getDefaultToolkit().getImage("32Laser.gif");
     g.drawImage(img1, x, y, null);
   }
   
+  public Rectangle getBounds() {
+    return new Rectangle(x, y, 32, 32); 
+  } 
 }
