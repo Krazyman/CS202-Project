@@ -15,17 +15,15 @@ public class Spawn {
   }
   
   public void update() {
+    spawnStar(1);
+    despawnStar();
+    despawnMeteor();
+    despawnExplosion();
+    despawnLaser();
     if (Game.time <= Game.bossTime) {
-    spawnStar(1);
-    despawnStar();
-    if (Game.time%50 == 0) {spawnMeteor(10);}
-    despawnMeteor();
-    despawnExplosion();
-    } else {
-    spawnStar(1);
-    despawnStar();
-    despawnMeteor();
-    despawnExplosion();
+      if (Game.time%50 == 0) {spawnMeteor(10);}
+      despawnMeteor();
+      despawnExplosion();
     }
     if (Game.time > Game.bossTime && count == 1) {
      handler.addObject(new Enemy(400, 0, ID.Enemy)); 
