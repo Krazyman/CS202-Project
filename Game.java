@@ -19,6 +19,7 @@ public class Game extends Canvas implements Runnable{
   private Random r; // just to test
   private Handler handler;
   private HUD hud;
+  private Spawn spawner;
   
   public static double time = 0;
 
@@ -29,6 +30,7 @@ public class Game extends Canvas implements Runnable{
     new Window(WIDTH, HEIGHT, "SpaceShooter", this);
     
     hud = new HUD();
+    spawner = new Spawn(handler, hud);
     hud.update();
 
     r= new Random(); // just to test
@@ -60,10 +62,6 @@ public class Game extends Canvas implements Runnable{
     long timer = System.currentTimeMillis();
     int frames = 0;
     while(running){
-     if(time%500 == 0) {
-     spawnMeteor(2);
-      }
-     despawnMeteor(); 
      time += 1;
      long now = System.nanoTime();
      delta += (now - lastTime) /ns;
@@ -89,6 +87,7 @@ public class Game extends Canvas implements Runnable{
   private void update() {
     handler.update();
     hud.update();
+    spawner.update();
   }
   
   private void draw() {
@@ -123,29 +122,5 @@ public class Game extends Canvas implements Runnable{
   
   public static void main(String[] args) {
     new Game();
-  }
-  
-  public void spawnMeteor(int num) {
-    for(int i=0; i<num; i++) {
-     handler.addObject(new Meteor(r.nextInt(WIDTH), 0, ID.Meteor));
-     handler.addObject(new Star(r.nextInt(WIDTH), 0, ID.Star));
-    }
-  }
-  
-  public void despawnMeteor() {
-    for(int i=0; i<handler.object.size(); i++) {
-     GameObject tempObject = handler.object.get(i);
-     
-     if(tempObject.getId() == ID.Meteor) {
-       if (tempObject.getY() > HEIGHT)  {
-        handler.removeObject(tempObject); 
-       } 
-     }
-     if(tempObject.getId() == ID.Star) {
-       if (tempObject.getY() > HEIGHT)  {
-        handler.removeObject(tempObject); 
-       }
-     }
-    }
   }
 }

@@ -4,4 +4,5 @@ public enum ID {
   Meteor(),
   Star(),
   Laser(),
+  Explosion(),
 }

@@ -1,17 +1,14 @@
 import java.awt.*;
-
 import java.awt.Image;
-
 import javax.swing.ImageIcon;
 
-
-public class Meteor extends GameObject{
+public class Explosion extends GameObject{
  
-  Image enemy;
-  public Meteor(int x, int y, ID id) {
+  
+  public Explosion(int x, int y, ID id) {
    super(x, y, id);
    
-   velY = 3;
+   velY = 5;
   }
   
   public void update() {
@@ -22,13 +19,12 @@ public class Meteor extends GameObject{
   }
   
   public void draw(Graphics g) {
-    Graphics2D g2d = (Graphics2D) g;     
-    Image img1 = Toolkit.getDefaultToolkit().getImage("64Meteor.png");
+    Graphics2D g2d = (Graphics2D) g;
+    Image img1 = Toolkit.getDefaultToolkit().getImage("32Explosion.gif");
     g.drawImage(img1, x, y, null);
   }
   
   public Rectangle getBounds() {
-    return new Rectangle(x, y, 48, 48); 
+    return new Rectangle(x, y, 4, 4); 
   } 
 }
-

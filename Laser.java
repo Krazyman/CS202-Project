@@ -25,6 +25,7 @@ public class Laser extends GameObject{
        if(getBounds().intersects(tempObject.getBounds())) {
          handler.removeObject(tempObject);
          handler.removeObject(this);
+         handler.addObject(new Explosion(x, y, ID.Explosion));
        }
      }
     }
@@ -38,5 +39,5 @@ public class Laser extends GameObject{
   
   public Rectangle getBounds() {
     return new Rectangle(x, y, 32, 32); 
-  } 
+  }
 }

@@ -34,9 +34,6 @@ public class Laser extends GameObject{
     Graphics2D g2d = (Graphics2D) g;
     Image img1 = Toolkit.getDefaultToolkit().getImage("32Laser.gif");
     g.drawImage(img1, x, y, null);
-    
-//    g.setColor(Color.red);
-//    g.fillRect(x, y, 1, 3);
   }
   
   public Rectangle getBounds() {

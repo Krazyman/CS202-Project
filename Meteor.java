@@ -1,9 +1,6 @@
 import java.awt.*;
-
 import java.awt.Image;
-
 import javax.swing.ImageIcon;
-
 
 public class Meteor extends GameObject{
  
@@ -18,7 +15,7 @@ public class Meteor extends GameObject{
     x += velX;
     y += velY;
     
-    x = Game.clamp(x, 0, Game.WIDTH-32);
+    x = Game.clamp(x, 0, Game.WIDTH-24);
   }
   
   public void draw(Graphics g) {

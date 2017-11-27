@@ -2,10 +2,6 @@ public enum ID {
   Player(),
   Enemy(),
   Meteor(),
-<<<<<<< HEAD
-    
-=======
   Star(),
   Laser(),
->>>>>>> f3987e1038c79e72de499eef2c4f137bfad222ce
 }

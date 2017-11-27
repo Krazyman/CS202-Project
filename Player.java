@@ -41,8 +41,10 @@ public class Player extends GameObject {
   }
   
   private void shoot(){
-    if (Game.shot){
-      handler.addObject(new Laser(this.getX()+16,this.getY(),ID.Laser,handler));}
+    if (Game.shot && HUD.BULLET!=0){
+      handler.addObject(new Laser(this.getX()+16,this.getY(),ID.Laser,handler));
+      HUD.BULLET -= 1;
+    }
   }
   
   public void draw(Graphics g) {

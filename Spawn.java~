@@ -1,0 +1,37 @@
+public class Spawn {
+  
+  private Handler handler;
+  private HUD hud;
+  
+  public Spawn(Handler handler, HUD hud) {
+   this.handler = handler; 
+   this.hud = hud;
+  }
+  
+  public void update() {
+    
+  }
+  
+  public void spawnMeteor(int num) {
+    for(int i=0; i<num; i++) {
+      handler.addObject(new Meteor(r.nextInt(WIDTH), 0, ID.Meteor));
+      handler.addObject(new Star(r.nextInt(WIDTH), 0, ID.Star));
+    }
+  }
+  
+  public void despawnMeteor() {
+    for(int i=0; i<handler.object.size(); i++) {
+      GameObject tempObject = handler.object.get(i);
+      
+      if(tempObject.getId() == ID.Meteor) {
+        if (tempObject.getY() > HEIGHT)  {
+          handler.removeObject(tempObject); 
+        } 
+      }
+      if(tempObject.getId() == ID.Star) {
+        if (tempObject.getY() > HEIGHT)  {
+          handler.removeObject(tempObject); 
+        }
+      }
+    }
+  }
