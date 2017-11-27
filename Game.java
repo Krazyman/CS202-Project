@@ -7,6 +7,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.util.Random;
+import javax.sound.sampled.*;
+import java.io.*;
 
 public class Game extends Canvas implements Runnable{
   
@@ -61,6 +63,22 @@ public class Game extends Canvas implements Runnable{
     double delta = 0;
     long timer = System.currentTimeMillis();
     int frames = 0;
+    
+    try {
+    File soundFile = new File("BetterCut.wav");
+    AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
+    Clip clip = AudioSystem.getClip();
+    clip.open(audioIn);
+    clip.start();
+     clip.loop(Clip.LOOP_CONTINUOUSLY);
+    } catch (UnsupportedAudioFileException e) {
+         e.printStackTrace();
+      } catch (IOException e) {
+         e.printStackTrace();
+      } catch (LineUnavailableException e) {
+         e.printStackTrace();
+      }
+    
     while(running){
      time += 1;
      long now = System.nanoTime();
