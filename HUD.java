@@ -68,9 +68,9 @@ public class HUD {
    g.fillRect(550, 15, BOSS1*2, 32);
    
    Font clock = new Font("century gothic" , 1, 50);
-   String timer = Double.toString(Game.time/4.333);
+   String timer = String.format("%.2f",Game.time/120);
    g.setColor(Color.red);
    g.setFont(clock);
-   g.drawString(timer,250, 50);
+   g.drawString(timer,300, 50);
   }
 }

@@ -10,7 +10,7 @@ public class Enemy extends GameObject {
   }
   
    public Rectangle getBounds() {
-   return new Rectangle(x, y, 64, 64); 
+     return new Rectangle(x, y, 128, 128); 
   }
   
   public void update() {
@@ -27,8 +27,8 @@ public class Enemy extends GameObject {
   public void draw(Graphics g) {
     Graphics2D g2d = (Graphics2D) g;
     
-    g.setColor(Color.red);
-    g.fillRect(x, y, 64, 64);
+    Image img1 = Toolkit.getDefaultToolkit().getImage("128Enemy.gif");
+    g.drawImage(img1, x, y, null);
   }
   
 }

@@ -23,7 +23,7 @@ public class Game extends Canvas implements Runnable{
   private HUD hud;
   private Spawn spawner;  
   
-  public static final int bossTime = 1000;
+  public static final int bossTime = 26000;
   public static double time = 0;
 
   public Game() {
@@ -65,19 +65,19 @@ public class Game extends Canvas implements Runnable{
     int frames = 0;
     
     try {
-    File soundFile = new File("BetterCut.wav");
-    AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
-    Clip clip = AudioSystem.getClip();
-    clip.open(audioIn);
-    clip.start();
-     clip.loop(Clip.LOOP_CONTINUOUSLY);
+      File soundFile = new File("LoweredAudio.wav");
+      AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
+      Clip clip = AudioSystem.getClip();
+      clip.open(audioIn);
+      clip.start();
+      clip.loop(Clip.LOOP_CONTINUOUSLY);
     } catch (UnsupportedAudioFileException e) {
-         e.printStackTrace();
-      } catch (IOException e) {
-         e.printStackTrace();
-      } catch (LineUnavailableException e) {
-         e.printStackTrace();
-      }
+      e.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (LineUnavailableException e) {
+      e.printStackTrace();
+    }
     
     while(running){
      time += 1;
