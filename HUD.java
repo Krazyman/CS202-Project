@@ -1,5 +1,6 @@
 import java.awt.Graphics;
 import java.awt.Color;
+import java.awt.Font;
 
 public class HUD {
  
@@ -66,8 +67,10 @@ public class HUD {
    g.setColor(new Color(value1, 0, 0));
    g.fillRect(550, 15, BOSS1*2, 32);
    
-   
-   String timer = Double.toString(Game.time);;
-   g.drawString(timer,400, 400);
+   Font clock = new Font("century gothic" , 1, 50);
+   String timer = Double.toString(Game.time/4.333);
+   g.setColor(Color.red);
+   g.setFont(clock);
+   g.drawString(timer,250, 50);
   }
 }
