@@ -12,7 +12,7 @@ public class Player extends GameObject {
   }
   
   public Rectangle getBounds() {
-   return new Rectangle(x, y, 32, 32); 
+   return new Rectangle(x, y, 64, 64); 
   }
   
   public void update() {
@@ -23,6 +23,8 @@ public class Player extends GameObject {
     y = Game.clamp((int)y, 0, Game.HEIGHT - 72);
     
     collision();
+    shoot();
+    
   }
   
   private void collision(){
@@ -33,16 +35,22 @@ public class Player extends GameObject {
        if(getBounds().intersects(tempObject.getBounds())) {
          HUD.HEALTH -= 2;
          handler.removeObject(tempObject);
-       }
+       } 
      }
     }
   }
   
+  private void shoot(){
+    if (Game.shot){
+      handler.addObject(new Laser(this.getX()+16,this.getY(),ID.Laser,handler));}
+  }
+  
   public void draw(Graphics g) {
     Graphics2D g2d = (Graphics2D) g;
-    
-    g.setColor(Color.blue);
-    g.fillRect(x, y, 32, 32);
+    Image img1 = Toolkit.getDefaultToolkit().getImage("64Ship.png");
+    g.drawImage(img1, x, y, null);
+//    g.setColor(Color.blue);
+//    g.fillRect(x, y, 32, 32);
   }
   
 }

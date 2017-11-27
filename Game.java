@@ -14,6 +14,7 @@ public class Game extends Canvas implements Runnable{
   
   public Thread thread;
   private boolean running = false;
+  public static boolean shot;
   
   private Random r; // just to test
   private Handler handler;
@@ -139,9 +140,13 @@ public class Game extends Canvas implements Runnable{
      if(tempObject.getId() == ID.Meteor) {
        if (tempObject.getY() > HEIGHT)  {
         handler.removeObject(tempObject); 
+       } 
+     }
+     if(tempObject.getId() == ID.Star) {
+       if (tempObject.getY() < 0)  {
+        handler.removeObject(tempObject); 
        }
      }
     }
   }
-  
 }
