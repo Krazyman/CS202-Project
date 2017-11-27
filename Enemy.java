@@ -7,11 +7,10 @@ public class Enemy extends GameObject {
    super(x, y, id); 
    
    velY = 1;
-   //velX =(int) Math.cos(Game.time)*8;
   }
   
    public Rectangle getBounds() {
-   return new Rectangle(x, y, 16, 16); 
+   return new Rectangle(x, y, 64, 64); 
   }
   
   public void update() {
@@ -26,7 +25,7 @@ public class Enemy extends GameObject {
     Graphics2D g2d = (Graphics2D) g;
     
     g.setColor(Color.red);
-    g.fillRect(x, y, 16, 16);
+    g.fillRect(x, y, 64, 64);
   }
   
 }

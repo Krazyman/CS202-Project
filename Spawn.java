@@ -5,6 +5,7 @@ public class Spawn {
   private Handler handler;
   private HUD hud;
   private Random r; // just to test
+  private int count = 1;
   
   public Spawn(Handler handler, HUD hud) {
    this.handler = handler; 
@@ -14,11 +15,22 @@ public class Spawn {
   }
   
   public void update() {
+    if (Game.time <= Game.bossTime) {
     spawnStar(1);
     despawnStar();
     if (Game.time%50 == 0) {spawnMeteor(10);}
     despawnMeteor();
     despawnExplosion();
+    } else {
+    spawnStar(1);
+    despawnStar();
+    despawnMeteor();
+    despawnExplosion();
+    }
+    if (Game.time > Game.bossTime && count == 1) {
+     handler.addObject(new Enemy(400, 0, ID.Enemy)); 
+     count = 0;
+    }
   }
   
   public void spawnMeteor(int num) {

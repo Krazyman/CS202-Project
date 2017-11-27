@@ -28,6 +28,28 @@ public class Laser extends GameObject{
          handler.addObject(new Explosion(x, y, ID.Explosion));
        }
      }
+     
+     if(tempObject.getId() == ID.Enemy) {
+       if(getBounds().intersects(tempObject.getBounds())) {
+         if(HUD.BOSS1 != 0) {
+          HUD.BOSS1 -= 1; 
+         } else if (HUD.BOSS2 != 0) {
+          HUD.BOSS2 -= 1; 
+         } else if (HUD.BOSS3 != 0) {
+          HUD.BOSS3 -= 1; 
+         } else if (HUD.BOSS4 != 0) {
+          HUD.BOSS4 -= 1; 
+         } else if (HUD.BOSS5 != 0) {
+          HUD.BOSS5 -= 1; 
+         } else if (HUD.BOSS5 ==0) {
+          handler.removeObject(tempObject);
+          handler.removeObject(this);
+          for (int j=0; j<10; j++) {
+            handler.addObject(new Explosion(x, y, ID.Explosion));
+          }                 
+         }
+       }
+     }
     }
   }
   

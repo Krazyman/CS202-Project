@@ -19,8 +19,9 @@ public class Game extends Canvas implements Runnable{
   private Random r; // just to test
   private Handler handler;
   private HUD hud;
-  private Spawn spawner;
+  private Spawn spawner;  
   
+  public static final int bossTime = 26000;
   public static double time = 0;
 
   public Game() {
