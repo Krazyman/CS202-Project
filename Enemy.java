@@ -14,11 +14,14 @@ public class Enemy extends GameObject {
   }
   
   public void update() {
-    x += Math.cos(-Game.time*.025)*4 + 0.49;
+    x += Math.cos(-Game.time*.0025)*8 + 0.5;
     y += velY;
     
     x = Game.clamp(x, 0, Game.WIDTH-32);
-    y = Game.clamp((int)y, 0, Game.HEIGHT - 48);
+    
+    if (y>=Game.HEIGHT) {
+     System.out.println("gg"); 
+    }
   }
   
   public void draw(Graphics g) {

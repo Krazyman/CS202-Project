@@ -26,7 +26,7 @@ public class Spawn {
       despawnExplosion();
     }
     if (Game.time > Game.bossTime && count == 1) {
-     handler.addObject(new Enemy(400, 0, ID.Enemy)); 
+     handler.addObject(new Enemy(600, 0, ID.Enemy)); 
      count = 0;
     }
   }

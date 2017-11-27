@@ -24,6 +24,7 @@ public class Player extends GameObject {
     
     collision();
     shoot();
+    death();
     
   }
   
@@ -35,6 +36,12 @@ public class Player extends GameObject {
        if(getBounds().intersects(tempObject.getBounds())) {
          HUD.HEALTH -= 2;
          handler.removeObject(tempObject);
+       } 
+     }
+     
+     if(tempObject.getId() == ID.Enemy) {
+       if(getBounds().intersects(tempObject.getBounds())) {
+         HUD.HEALTH -= 50;
        } 
      }
     }
@@ -51,6 +58,15 @@ public class Player extends GameObject {
     Graphics2D g2d = (Graphics2D) g;
     Image img1 = Toolkit.getDefaultToolkit().getImage("64Ship.png");
     g.drawImage(img1, x, y, null);
+  }
+  
+  public void death() {
+    if (HUD.HEALTH <= 0) {
+      for (int i=0; i<25; i++) {
+       handler.addObject(new Explosion(x, y, ID.Explosion)); 
+      }
+     handler.removeObject(this); 
+    }
   }
   
 }

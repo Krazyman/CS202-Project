@@ -36,7 +36,6 @@ public class Game extends Canvas implements Runnable{
 
     r= new Random(); // just to test
     handler.addObject(new Player(WIDTH/2, HEIGHT/2, ID.Player, handler));
-
     
   }
   
