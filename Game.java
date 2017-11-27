@@ -21,7 +21,7 @@ public class Game extends Canvas implements Runnable{
   private HUD hud;
   private Spawn spawner;  
   
-  public static final int bossTime = 26000;
+  public static final int bossTime = 1000;
   public static double time = 0;
 
   public Game() {

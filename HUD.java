@@ -15,13 +15,11 @@ public class HUD {
   private int blueValue = 255;
   private int redValue = 255;
   private int value1, value2, value3, value4;
-  private int count = 5;
 
   
   public void update() {   
     HEALTH = Game.clamp(HEALTH, 0, 100);
     BULLET = Game.clamp(BULLET, 0, 100);
-//    BOSS = Game.clamp(BOSS, 0, 100);
     greenValue = HEALTH * 2;
     blueValue = BULLET * 2;
     value1 = BOSS1 * 2;
@@ -29,14 +27,7 @@ public class HUD {
     value3 = BOSS3 * 2;
     value4 = BOSS4 * 2;    
     redValue = BOSS5 * 2;
-    
-    if (BULLET == 0 && count !=0 ){
-      BULLET = 100;
-      count--;
-    }
-    
-    
-    
+
   }
   
   public void draw(Graphics g) {
@@ -54,42 +45,26 @@ public class HUD {
    g.fillRect(15, 50, BULLET*2, 32);
    g.setColor(Color.white);
    g.drawRect(15, 50, 200, 32);
-   // boss health 1
+
    g.setColor(Color.gray);
    g.fillRect(550, 15, 200, 32);
-   g.setColor(new Color(value1, 0, 0));
-   g.fillRect(550, 15, BOSS1*2, 32);
    g.setColor(Color.white);
-   g.drawRect(550, 15, 200, 32);
-   // boss health 2
-   g.setColor(Color.gray);
-   g.fillRect(550, 15, 200, 32);
-   g.setColor(new Color(redValue, value2, 0));
-   g.fillRect(550, 15, BOSS2*2, 32);
-   g.setColor(Color.white);
-   g.drawRect(550, 15, 200, 32);
-   // boss health 3
-   g.setColor(Color.gray);
-   g.fillRect(550, 15, 200, 32);
-   g.setColor(new Color(redValue, 0, value3));
-   g.fillRect(550, 15, BOSS3*2, 32);
-   g.setColor(Color.white);
-   g.drawRect(550, 15, 200, 32);
-   // boss health 4
-   g.setColor(Color.gray);
-   g.fillRect(550, 15, 200, 32);
-   g.setColor(new Color(0, 0, value4));
-   g.fillRect(550, 15, BOSS4*2, 32);
-   g.setColor(Color.white);
-   g.drawRect(550, 15, 200, 32);
+   g.drawRect(15, 50, 200, 32);
    // boss health 5
-   g.setColor(Color.gray);
-   g.fillRect(550, 15, 200, 32);
    g.setColor(new Color(redValue, 0, 0));
    g.fillRect(550, 15, BOSS5*2, 32);
-   g.setColor(Color.white);
-   g.drawRect(550, 15, 200, 32);
-   
+   // boss health 4
+   g.setColor(new Color(0, 0, value4));
+   g.fillRect(550, 15, BOSS4*2, 32);
+   // boss health 3
+   g.setColor(new Color(redValue, 0, value3));
+   g.fillRect(550, 15, BOSS3*2, 32);
+   // boss health 2
+   g.setColor(new Color(redValue, value2, 0));
+   g.fillRect(550, 15, BOSS2*2, 32);
+   // boss health 1   
+   g.setColor(new Color(value1, 0, 0));
+   g.fillRect(550, 15, BOSS1*2, 32);
    
    
    String timer = Double.toString(Game.time);;
