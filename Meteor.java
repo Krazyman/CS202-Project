@@ -8,7 +8,7 @@ public class Meteor extends GameObject{
   public Meteor(int x, int y, ID id) {
    super(x, y, id);
    
-   velY = 3;
+   velY = 2;
   }
   
   public void update() {

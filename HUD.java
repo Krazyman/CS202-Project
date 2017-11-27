@@ -8,13 +8,20 @@ public class HUD {
 
   private int greenValue = 255;
   private int blueValue = 255;
+  private int count = 5;
 
   
   public void update() {   
     HEALTH = Game.clamp(HEALTH, 0, 100);
     BULLET = Game.clamp(BULLET, 0, 100);
     greenValue = HEALTH * 2;
-    blueValue = BULLET * 2;
+    blueValue = (int)(BULLET * 2);
+    if (BULLET == 0 && count !=0 ){
+      do {
+       BULLET += 1; 
+      } while (BULLET!=100);
+      count-=1;
+    }
     
   }
   

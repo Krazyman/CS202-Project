@@ -16,14 +16,16 @@ public class Spawn {
   public void update() {
     spawnStar(1);
     despawnStar();
-    if (Game.time%50 == 0) {spawnMeteor(15);}
+    if (Game.time%50 == 0) {spawnMeteor(10);}
     despawnMeteor();
     despawnExplosion();
   }
   
   public void spawnMeteor(int num) {
     for(int i=0; i<num; i++) {
-      handler.addObject(new Meteor(r.nextInt(Game.WIDTH), 0, ID.Meteor));
+      GameObject tempObject = new Meteor(r.nextInt(Game.WIDTH), 0, ID.Meteor);
+      handler.addObject(tempObject);
+      tempObject.setVelY(r.nextInt(5)+1);
     }
   }
   
