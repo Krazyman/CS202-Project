@@ -21,13 +21,25 @@ public class Game extends Canvas implements Runnable{
   private Random r; // just to test
   private Handler handler;
   private HUD hud;
-  private Spawn spawner;  
+  private Spawn spawner;
+  private Menu menu;
+
+  public enum STATE {
+    Menu,
+    Game,
+    Help,
+    Win,
+    Lose
+  }  
   
   public static final int bossTime = 1;
   public static double time = 0;
 
+  public STATE gameState = STATE.Menu;
+
   public Game() {
     handler = new Handler();
+    menu = new Menu(this);
     this.addKeyListener(new KeyInput(handler));
     
     new Window(WIDTH, HEIGHT, "SpaceShooter", this);
@@ -37,8 +49,10 @@ public class Game extends Canvas implements Runnable{
     hud.update();
 
     r= new Random(); // just to test
-    handler.addObject(new Player(WIDTH/2, HEIGHT/2, ID.Player, handler));
-    
+
+    if(gameState == STATE.Game) {
+      handler.addObject(new Player(WIDTH/2, HEIGHT/2, ID.Player, handler));
+    }
   }
   
   public synchronized void start() {
@@ -63,22 +77,6 @@ public class Game extends Canvas implements Runnable{
     double delta = 0;
     long timer = System.currentTimeMillis();
     int frames = 0;
-    
-    try {
-      File soundFile = new File("LoweredAudio.wav");
-      AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
-      Clip clip = AudioSystem.getClip();
-      clip.open(audioIn);
-      clip.start();
-      clip.loop(Clip.LOOP_CONTINUOUSLY);
-    } catch (UnsupportedAudioFileException e) {
-      e.printStackTrace();
-    } catch (IOException e) {
-      e.printStackTrace();
-    } catch (LineUnavailableException e) {
-      e.printStackTrace();
-    }
-    
     while(running){
      time += 1;
      long now = System.nanoTime();
@@ -104,8 +102,28 @@ public class Game extends Canvas implements Runnable{
   
   private void update() {
     handler.update();
-    hud.update();
-    spawner.update();
+    menu.update();
+    
+    if(gameState == STATE.Game) {
+        hud.update();
+        spawner.update();
+        
+        try {
+          File soundFile = new File("LoweredAudio.wav");
+          AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
+          Clip clip = AudioSystem.getClip();
+          clip.open(audioIn);
+          clip.start();
+          clip.loop(Clip.LOOP_CONTINUOUSLY);
+        } catch (UnsupportedAudioFileException e) {
+          e.printStackTrace();
+        } catch (IOException e) {
+          e.printStackTrace();
+        } catch (LineUnavailableException e) {
+          e.printStackTrace();
+        }  
+    }
+    
   }
   
   private void draw() {
@@ -121,7 +139,13 @@ public class Game extends Canvas implements Runnable{
     g.fillRect(0, 0, WIDTH, HEIGHT);
     
     handler.draw(g);
-    hud.draw(g);
+
+    if(gameState == STATE.Game) {
+      hud.draw(g);
+    } else if (gameState == STATE.Menu ||
+               gameState == STATE.Help ||
+               gameState == STATE.Lose ||
+               gameState == STATE.Win) { menu.draw(g); }
     
     g.dispose();
     bs.show();
