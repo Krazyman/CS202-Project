@@ -76,7 +76,7 @@ public class Player extends GameObject {
             handler.addObject(new Explosion(tempX, tempY, ID.Explosion));
           }
           if(deathCounter <= 0) {
-            game.gameState = Game.STATE.Lose; 
+            game.gameState = Game.STATE.Win; 
           } else {
             deathCounter --; 
           }       
