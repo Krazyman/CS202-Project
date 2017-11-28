@@ -6,25 +6,15 @@ public class Enemy extends GameObject {
   public Enemy(int x, int y, ID id) {
    super(x, y, id); 
    
-<<<<<<< HEAD
    if(Game.time%4 == 0) {
    velY = 1;     
    }
-=======
-   //if(Game.time%3 == 0) {
-     velY = 1;
-  // } 
->>>>>>> ab8f7a0d047e9c47516526d23617c6f008308d15
   }
    /**
    * Update method for enemy movement
    */
   public void update() {
-<<<<<<< HEAD
     x += Math.cos(-Game.time*.025)*8 + 0.5;
-=======
-    x += Math.cos(-Game.time*.0025)*8;//+ 0.5;
->>>>>>> ab8f7a0d047e9c47516526d23617c6f008308d15
     y += velY;
     
     x = Game.clamp(x, 0, Game.WIDTH-128);
