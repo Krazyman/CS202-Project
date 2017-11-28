@@ -87,5 +87,7 @@ public class HUD {
    g.setColor(Color.red);
    g.setFont(clock);
    g.drawString(timer,300, 50);
+//   String pls = Integer.toString(Player.eDeathCounter);
+//   g.drawString(pls, 400, 400);
   }
 }

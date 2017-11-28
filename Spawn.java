@@ -69,7 +69,10 @@ public class Spawn {
       HUD.BOSS3 = 100;
       HUD.BOSS4 = 100;
       HUD.BOSS5 = 100;
-      Player.deathCounter = 150;
+      Player.deathCounter = 300;
+      Player.eDeathCounter = 7500;
+      Player.death = false;
+      Player.ammo = 5;
     } 
   }
   

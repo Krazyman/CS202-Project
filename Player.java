@@ -6,17 +6,19 @@ public class Player extends GameObject {
   private Game game;
   private Handler handler;
   public static int ammo = 5;
-  public static int deathCounter = 150;
+  public static int deathCounter = 300;
+  public static int eDeathCounter = 7500;
+  public static boolean death = false;
   
   public Player(int x, int y, ID id, Handler handler, Game game) {
-   super(x, y, id); 
-   this.handler = handler;
-   this.game = game;
-   
+    super(x, y, id); 
+    this.handler = handler;
+    this.game = game;
+    
   }
   
   public Rectangle getBounds() {
-   return new Rectangle(x, y, 64, 64); 
+    return new Rectangle(x, y, 64, 64); 
   }
   
   public void update() {
@@ -30,59 +32,61 @@ public class Player extends GameObject {
     shoot();
     death();
     
+    if (death) {
+      eDeathCounter--; 
+      if(eDeathCounter <= 0) {
+        game.gameState = Game.STATE.Win; 
+      }
+    }
   }
   
   private void collision(){
     for(int i=0; i<handler.object.size(); i++) {
-     GameObject tempObject = handler.object.get(i);
-     
-     if(tempObject.getId() == ID.Meteor) {
-       if(getBounds().intersects(tempObject.getBounds())) {
-         HUD.HEALTH -= 2;
-         handler.removeObject(tempObject);
-       } 
-     }
-     
-     if(tempObject.getId() == ID.Enemy) {
-       if(getBounds().intersects(tempObject.getBounds())) {
-         HUD.HEALTH -= 50;
-         if(HUD.BOSS1 > 0) {
-          HUD.BOSS1 -= 50;
-          this.setX(tempObject.getX());
-          this.setY(tempObject.getY() + 256);
-         } else if (HUD.BOSS2 > 0) {
-          HUD.BOSS2 -= 50;
-          this.setX(tempObject.getX());
-          this.setY(tempObject.getY() + 256);
-         } else if (HUD.BOSS3 > 0) {
-          HUD.BOSS3 -= 50;
-          this.setX(tempObject.getX());
-          this.setY(tempObject.getY() + 256);
-         } else if (HUD.BOSS4 > 0) {
-          HUD.BOSS4 -= 50;
-          this.setX(tempObject.getX());
-          this.setY(tempObject.getY() + 256);
-         } else if (HUD.BOSS5 > 0) {
-          HUD.BOSS5 -= 50; 
-          this.setX(tempObject.getX());
-          this.setY(tempObject.getY() + 256);
-         } else if (HUD.BOSS5 <= 0) {
+      GameObject tempObject = handler.object.get(i);
+      
+      if(tempObject.getId() == ID.Meteor) {
+        if(getBounds().intersects(tempObject.getBounds())) {
+          HUD.HEALTH -= 2;
           handler.removeObject(tempObject);
-          for (int j=0; j<25; j++) {
-            int tempX = tempObject.getX();
-            int tempY = tempObject.getY();
-            handler.addObject(new Explosion(tempX-i, tempY+i, ID.Explosion));
-            handler.addObject(new Explosion(tempX+i, tempY-i, ID.Explosion));
-            handler.addObject(new Explosion(tempX, tempY, ID.Explosion));
+        } 
+      }
+      
+      if(tempObject.getId() == ID.Enemy) {
+        if(getBounds().intersects(tempObject.getBounds())) {
+          HUD.HEALTH -= 50;
+          if(HUD.BOSS1 > 0) {
+            HUD.BOSS1 -= 50;
+            this.setX(tempObject.getX());
+            this.setY(tempObject.getY() + 256);
+          } else if (HUD.BOSS2 > 0) {
+            HUD.BOSS2 -= 50;
+            this.setX(tempObject.getX());
+            this.setY(tempObject.getY() + 256);
+          } else if (HUD.BOSS3 > 0) {
+            HUD.BOSS3 -= 50;
+            this.setX(tempObject.getX());
+            this.setY(tempObject.getY() + 256);
+          } else if (HUD.BOSS4 > 0) {
+            HUD.BOSS4 -= 50;
+            this.setX(tempObject.getX());
+            this.setY(tempObject.getY() + 256);
+          } else if (HUD.BOSS5 > 0) {
+            HUD.BOSS5 -= 50; 
+            this.setX(tempObject.getX());
+            this.setY(tempObject.getY() + 256);
+          } else if (HUD.BOSS5 <= 0) {
+            handler.removeObject(tempObject);
+            for (int j=0; j<25; j++) {
+              int tempX = tempObject.getX();
+              int tempY = tempObject.getY();
+              handler.addObject(new Explosion(tempX-i, tempY+i, ID.Explosion));
+              handler.addObject(new Explosion(tempX+i, tempY-i, ID.Explosion));
+              handler.addObject(new Explosion(tempX, tempY, ID.Explosion));
+            }
+            death = true;        
           }
-          if(deathCounter <= 0) {
-            game.gameState = Game.STATE.Win; 
-          } else {
-            deathCounter --; 
-          }       
-         }
-       } 
-     }
+        } 
+      }
     }
   }
   
@@ -105,22 +109,19 @@ public class Player extends GameObject {
   
   public void death() {
     if(HUD.BOSSPASS >= Game.HEIGHT) {
-     game.gameState = Game.STATE.Lose; 
-     ammo = 5;
+      game.gameState = Game.STATE.Lose; 
     }
     if (HUD.HEALTH <= 0) {
       for (int i=0; i<25; i++) {
-       handler.addObject(new Explosion(x-i, y+i, ID.Explosion));
-       handler.addObject(new Explosion(x+i, y-i, ID.Explosion));
-       handler.addObject(new Explosion(x, y, ID.Explosion));
+        handler.addObject(new Explosion(x-i, y+i, ID.Explosion));
+        handler.addObject(new Explosion(x+i, y-i, ID.Explosion));
+        handler.addObject(new Explosion(x, y, ID.Explosion));
       }
       if(deathCounter <= 0) {
         game.gameState = Game.STATE.Lose; 
       } else {
-       deathCounter --; 
+        deathCounter --; 
       }
-     ammo = 5;
     }
-  }
-  
+  }  
 }

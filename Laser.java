@@ -20,6 +20,12 @@ public class Laser extends GameObject{
     
     x = Game.clamp(x, 0, Game.WIDTH-32);
     collision();
+    if (Player.death) {
+      Player.eDeathCounter--; 
+      if(Player.eDeathCounter <= 0) {
+        game.gameState = Game.STATE.Win;
+      }
+    } 
   }
   
   private void collision(){
@@ -61,12 +67,7 @@ public class Laser extends GameObject{
               handler.addObject(new Explosion(tempX+i, tempY-i, ID.Explosion));
               handler.addObject(new Explosion(tempX, tempY, ID.Explosion));
             }
-            if(Player.deathCounter <= 0) {
-              game.gameState = Game.STATE.Win; 
-            } else {
-              Player.deathCounter --; 
-            }
-            Player.ammo = 5;
+            Player.death = true;
           }
         }
       }

@@ -3,6 +3,10 @@ import java.awt.Color;
 import java.awt.Font;
 
 public class HUD {
+  private Game game;
+  
+  String timer;
+  double copy;
  
   public static int HEALTH = 100;
   public static int BULLET = 100;
@@ -11,12 +15,17 @@ public class HUD {
   public static int BOSS3 = 100;
   public static int BOSS4 = 100;
   public static int BOSS5 = 100;
+  public static int BOSSPASS;
 
   private int greenValue = 255;
   private int blueValue = 255;
   private int redValue = 255;
   private int value1, value2, value3, value4;
 
+    
+  public HUD(Game game) {
+    this.game = game;
+  }
   
   public void update() {   
     HEALTH = Game.clamp(HEALTH, 0, 100);
@@ -33,8 +42,8 @@ public class HUD {
     value3 = BOSS3 * 2;
     value4 = BOSS4 * 2;    
     redValue = BOSS5 * 2;
-
-  }
+    
+  }    
   
   public void draw(Graphics g) {
    // health bar
@@ -73,7 +82,8 @@ public class HUD {
    g.drawRect(15, 50, 200, 32);
    
    Font clock = new Font("century gothic" , 1, 50);
-   String timer = String.format("%.2f",Game.time/120);
+   copy = Game.time;
+   timer = String.format("%.2f",copy/120);
    g.setColor(Color.red);
    g.setFont(clock);
    g.drawString(timer,300, 50);
