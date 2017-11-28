@@ -1,12 +1,15 @@
 import java.awt.*;
 
+/**
+ * Subclass of GameObject for laser properties
+ */
 public class Laser extends GameObject{
  private Handler handler;
   
   public Laser(int x, int y, ID id, Handler handler) {
    super(x, y, id);
    this.handler = handler;
-   velY = -3;
+   velY = -3;//velocity negative so it moves upward
   }
   
   public void update() {
@@ -58,12 +61,19 @@ public class Laser extends GameObject{
     }
   }
   
+  /**
+   * Draws 32x32 Laser.gif on top of the hitbox
+   * @param Graphics g
+   */
   public void draw(Graphics g) {
     Graphics2D g2d = (Graphics2D) g;
     Image img1 = Toolkit.getDefaultToolkit().getImage("32Laser.gif");
     g.drawImage(img1, x, y, null);
   }
   
+  /**
+   * Draws 32x32 as the hitbox
+   */
   public Rectangle getBounds() {
     return new Rectangle(x, y, 32, 32); 
   }

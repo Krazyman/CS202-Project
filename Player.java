@@ -5,8 +5,8 @@ public class Player extends GameObject {
   
   private Game game;
   private Handler handler;
-  private int ammo = 5;
-  private int deathCounter = 1;
+  public static int ammo = 5;
+  public static int deathCounter = 150;
   
   public Player(int x, int y, ID id, Handler handler, Game game) {
    super(x, y, id); 
@@ -68,9 +68,18 @@ public class Player extends GameObject {
           this.setY(tempObject.getY() + 256);
          } else if (HUD.BOSS5 <= 0) {
           handler.removeObject(tempObject);
-          for (int j=0; j<10; j++) {
-            handler.addObject(new Explosion(x, y, ID.Explosion));
-          }                 
+          for (int j=0; j<25; j++) {
+            int tempX = tempObject.getX();
+            int tempY = tempObject.getY();
+            handler.addObject(new Explosion(tempX-i, tempY+i, ID.Explosion));
+            handler.addObject(new Explosion(tempX+i, tempY-i, ID.Explosion));
+            handler.addObject(new Explosion(tempX, tempY, ID.Explosion));
+          }
+          if(deathCounter <= 0) {
+            game.gameState = Game.STATE.Lose; 
+          } else {
+            deathCounter --; 
+          }       
          }
        } 
      }
@@ -79,7 +88,7 @@ public class Player extends GameObject {
   
   private void shoot(){
     if (Game.shot && HUD.BULLET!=0){
-      handler.addObject(new Laser(this.getX()+16,this.getY(),ID.Laser,handler));
+      handler.addObject(new Laser(this.getX()+16,this.getY(),ID.Laser,handler, game));
       HUD.BULLET -= 1;
     }
     if (HUD.BULLET == 0 && ammo != 0) {
@@ -95,9 +104,9 @@ public class Player extends GameObject {
   }
   
   public void death() {
-    
-    if(HUD.BOSS5 == 0 || HUD.BOSSPASS >= Game.HEIGHT) {
+    if(HUD.BOSSPASS >= Game.HEIGHT) {
      game.gameState = Game.STATE.Lose; 
+     ammo = 5;
     }
     if (HUD.HEALTH <= 0) {
       for (int i=0; i<25; i++) {
@@ -105,8 +114,12 @@ public class Player extends GameObject {
        handler.addObject(new Explosion(x+i, y-i, ID.Explosion));
        handler.addObject(new Explosion(x, y, ID.Explosion));
       }
-      game.gameState = Game.STATE.Lose; 
-      ammo = 5;
+      if(deathCounter <= 0) {
+        game.gameState = Game.STATE.Lose; 
+      } else {
+       deathCounter --; 
+      }
+     ammo = 5;
     }
   }
   
