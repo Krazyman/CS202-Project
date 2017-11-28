@@ -7,8 +7,6 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.util.Random;
-import javax.sound.sampled.*;
-import java.io.*;
 
 public class Game extends Canvas implements Runnable{
   
@@ -44,7 +42,7 @@ public class Game extends Canvas implements Runnable{
     
     new Window(WIDTH, HEIGHT, "SpaceShooter", this);
     
-    hud = new HUD();
+    hud = new HUD(this);
     spawner = new Spawn(this, handler, hud);
     hud.update();
 
@@ -88,7 +86,6 @@ public class Game extends Canvas implements Runnable{
      
      if(System.currentTimeMillis() - timer > 1000) {
        timer += 1000;
-       //System.out.println("FPS: " + frames);
        frames = 0;
      }
     }
@@ -103,25 +100,16 @@ public class Game extends Canvas implements Runnable{
       time += 1;
       hud.update();
       spawner.update();
-        
-//        try {
-//          File soundFile = new File("LoweredAudio.wav");
-//          AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
-//          Clip clip = AudioSystem.getClip();
-//          clip.open(audioIn);
-//          clip.start();
-//          clip.loop(Clip.LOOP_CONTINUOUSLY);
-//        } catch (UnsupportedAudioFileException e) {
-//          e.printStackTrace();
-//        } catch (IOException e) {
-//          e.printStackTrace();
-//        } catch (LineUnavailableException e) {
-//          e.printStackTrace();
-//        }  
     } else if (gameState == STATE.Menu ||
                gameState == STATE.Help ||
                gameState == STATE.Lose ||
-               gameState == STATE.Win) {time = 3500;}
+               gameState == STATE.Win) {
+      time = 3500;
+      HUD.HEALTH = 100;
+      HUD.BULLET = 100;
+      handler.object.clear();
+      spawner.update2();
+    }
     
   }
   

@@ -3,6 +3,7 @@ import java.awt.Color;
 import java.awt.Font;
 
 public class HUD {
+  private Game game;
   
   String timer;
   double copy;
@@ -14,12 +15,17 @@ public class HUD {
   public static int BOSS3 = 100;
   public static int BOSS4 = 100;
   public static int BOSS5 = 100;
+  public static int BOSSPASS;
 
   private int greenValue = 255;
   private int blueValue = 255;
   private int redValue = 255;
   private int value1, value2, value3, value4;
 
+    
+  public HUD(Game game) {
+    this.game = game;
+  }
   
   public void update() {   
     HEALTH = Game.clamp(HEALTH, 0, 100);
@@ -36,8 +42,14 @@ public class HUD {
     value3 = BOSS3 * 2;
     value4 = BOSS4 * 2;    
     redValue = BOSS5 * 2;
-
-  }
+    if(HEALTH == 0) {
+     game.gameState = Game.STATE.Lose; 
+    } 
+    if(BOSS5 == 0 || BOSSPASS >= Game.HEIGHT) {
+     game.gameState = Game.STATE.Win; 
+    }
+    
+  }    
   
   public void draw(Graphics g) {
    // health bar

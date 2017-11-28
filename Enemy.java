@@ -18,7 +18,7 @@ public class Enemy extends GameObject {
     y += velY;
     
     x = Game.clamp(x, 0, Game.WIDTH-128);
-
+    HUD.BOSSPASS = y;
   }
   
   /**

@@ -1,4 +1,6 @@
 import java.util.Random;
+import javax.sound.sampled.*;
+import java.io.*;
 
 public class Spawn {
   
@@ -8,6 +10,7 @@ public class Spawn {
   private Random r; // just to test
   private int count = 1;
   private int play = 0;
+  Clip clip;
   
   public Spawn(Game game, Handler handler, HUD hud) {
    this.game = game;
@@ -20,12 +23,28 @@ public class Spawn {
     if (game.gameState == Game.STATE.Game && play == 0) {
      handler.addObject(new Player(Game.WIDTH/2, Game.HEIGHT/2, ID.Player, handler));
      play = 1;
+     try {
+       File soundFile = new File("LoweredAudio.wav");
+       AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
+       clip = AudioSystem.getClip();
+       clip.open(audioIn);
+       clip.start();
+       clip.loop(Clip.LOOP_CONTINUOUSLY);
+     } catch (UnsupportedAudioFileException e) {
+       e.printStackTrace();
+     } catch (IOException e) {
+       e.printStackTrace();
+     } catch (LineUnavailableException e) {
+       e.printStackTrace();
+     }
     }
+    
     spawnStar(1);
     despawnStar();
     despawnMeteor();
     despawnExplosion();
     despawnLaser();
+    
     if (Game.time <= Game.bossTime) {
       if (Game.time%50 == 0) {spawnMeteor(10);}//spawns 10 meteors every x seconds
       despawnMeteor();
@@ -36,10 +55,13 @@ public class Spawn {
      handler.addObject(new Enemy(400, 0, ID.Enemy)); 
      count = 0;
     }
-    
-    if(game.gameState != Game.STATE.Game && play == 1) {
+  }
+  
+  public void update2() {
+   if(game.gameState != Game.STATE.Game && play == 1) {
       play = 0;
-    }
+      clip.stop();
+    } 
   }
   
   public void spawnMeteor(int num) {

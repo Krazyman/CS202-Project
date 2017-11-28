@@ -4,7 +4,7 @@ import java.awt.Rectangle;
 public class Player extends GameObject {
   
   Handler handler;
-  private int ammo = 8;
+  private int ammo = 2;
   
   public Player(int x, int y, ID id, Handler handler) {
    super(x, y, id); 
@@ -42,27 +42,27 @@ public class Player extends GameObject {
      
      if(tempObject.getId() == ID.Enemy) {
        if(getBounds().intersects(tempObject.getBounds())) {
-         HUD.HEALTH -= 25;
+         HUD.HEALTH -= 50;
          if(HUD.BOSS1 > 0) {
           HUD.BOSS1 -= 50;
           this.setX(tempObject.getX());
-          this.setY(tempObject.getY() + 128);
+          this.setY(tempObject.getY() + 256);
          } else if (HUD.BOSS2 > 0) {
           HUD.BOSS2 -= 50;
           this.setX(tempObject.getX());
-          this.setY(tempObject.getY() + 128);
+          this.setY(tempObject.getY() + 256);
          } else if (HUD.BOSS3 > 0) {
           HUD.BOSS3 -= 50;
           this.setX(tempObject.getX());
-          this.setY(tempObject.getY() + 128);
+          this.setY(tempObject.getY() + 256);
          } else if (HUD.BOSS4 > 0) {
           HUD.BOSS4 -= 50;
           this.setX(tempObject.getX());
-          this.setY(tempObject.getY() + 128);
+          this.setY(tempObject.getY() + 256);
          } else if (HUD.BOSS5 > 0) {
           HUD.BOSS5 -= 50; 
           this.setX(tempObject.getX());
-          this.setY(tempObject.getY() + 128);
+          this.setY(tempObject.getY() + 256);
          } else if (HUD.BOSS5 <= 0) {
           handler.removeObject(tempObject);
           for (int j=0; j<10; j++) {
@@ -98,7 +98,8 @@ public class Player extends GameObject {
        handler.addObject(new Explosion(x+i, y-i, ID.Explosion));
        handler.addObject(new Explosion(x, y, ID.Explosion));
       }
-     handler.removeObject(this); 
+     handler.removeObject(this);
+     ammo = 2;
     }
   }
   
