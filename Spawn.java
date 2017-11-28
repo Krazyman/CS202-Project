@@ -27,10 +27,11 @@ public class Spawn {
     despawnExplosion();
     despawnLaser();
     if (Game.time <= Game.bossTime) {
-      if (Game.time%50 == 0) {spawnMeteor(10);}
+      if (Game.time%50 == 0) {spawnMeteor(10);}//spawns 10 meteors every x seconds
       despawnMeteor();
       despawnExplosion();
     }
+    //Spawns boss enemy once x time has passed
     if (Game.time > Game.bossTime && count == 1) {
      handler.addObject(new Enemy(400, 0, ID.Enemy)); 
      count = 0;
@@ -45,55 +46,67 @@ public class Spawn {
     for(int i=0; i<num; i++) {
       GameObject tempObject = new Meteor(r.nextInt(Game.WIDTH), 0, ID.Meteor);
       handler.addObject(tempObject);
-      tempObject.setVelY(r.nextInt(5)+1);
+      tempObject.setVelY(r.nextInt(5)+1);//velocity is randomized when spawned
     }
   }
   
+  /**
+   * Despawns lasers
+   */
   public void despawnMeteor() {
     for(int i=0; i<handler.object.size(); i++) {
       GameObject tempObject = handler.object.get(i);
       
       if(tempObject.getId() == ID.Meteor) {
-        if (tempObject.getY() > Game.HEIGHT)  {
+        if (tempObject.getY() > Game.HEIGHT)  {//despawns meteor when moves beyond canvas
           handler.removeObject(tempObject); 
         } 
       }
     }
   }
-    
+ 
   public void spawnStar(int num) {
     for(int i=0; i<num; i++) {
       handler.addObject(new Star(r.nextInt(Game.WIDTH), 0, ID.Star)); 
     }
   }
   
+  /**
+   * Despawns lasers
+   */
   public void despawnStar(){
     for(int i=0; i<handler.object.size(); i++) {
       GameObject tempObject = handler.object.get(i);
       if(tempObject.getId() == ID.Star) {
-        if (tempObject.getY() > Game.HEIGHT)  {
+        if (tempObject.getY() > Game.HEIGHT){//despawns laser when moves beyond canvas
           handler.removeObject(tempObject); 
         }
       }
     }
   }
   
+  /**
+   * Despawns lasers
+   */
   public void despawnExplosion() {
     for(int i=0; i<handler.object.size(); i++) {
       GameObject tempObject = handler.object.get(i);
       if(tempObject.getId() == ID.Explosion) {
-        if (Game.time%50==0)  {
+        if (Game.time%50==0)  {//if gametime is evenly divisible by 50, despawn explosion
           handler.removeObject(tempObject); 
         }
       }
     }
   }
   
+  /**
+   * Despawns lasers
+   */
   public void despawnLaser() {
      for(int i=0; i<handler.object.size(); i++) {
       GameObject tempObject = handler.object.get(i);
       if(tempObject.getId() == ID.Laser) {
-       if (tempObject.getY() < 0)  {
+       if (tempObject.getY() < 0)  {//despawns laser once it moves beyond canvas
           handler.removeObject(tempObject); 
         }
       }

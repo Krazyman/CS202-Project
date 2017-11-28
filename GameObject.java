@@ -1,6 +1,9 @@
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
+/**
+ * Superclass for game object basic properties such as position and speed
+ */
 public abstract class GameObject {
   protected int x, y;
   protected ID id;

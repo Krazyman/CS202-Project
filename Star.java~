@@ -24,6 +24,6 @@ public class Star extends GameObject{
   }
   
   public Rectangle getBounds() {
-    return new Rectangle(x, y, 16, 16); 
+    return new Rectangle(x, y, 4, 4); 
   } 
 }
