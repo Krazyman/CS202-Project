@@ -12,11 +12,11 @@ import java.io.*;
 
 public class Game extends Canvas implements Runnable{
   
-  public static final int WIDTH = 800, HEIGHT = 800;  
+  public static final int WIDTH = 800, HEIGHT = 800;//width and height of canvas
   
   public Thread thread;
   private boolean running = false;
-  public static boolean shot;
+  public static boolean shot;//boolean for shooting
   
   private Random r; // just to test
   private Handler handler;
@@ -30,7 +30,7 @@ public class Game extends Canvas implements Runnable{
     handler = new Handler();
     this.addKeyListener(new KeyInput(handler));
     
-    new Window(WIDTH, HEIGHT, "SpaceShooter", this);
+    new Window(WIDTH, HEIGHT, "SpaceShooter", this);//creating window with title "SpaceShooter"
     
     hud = new HUD();
     spawner = new Spawn(handler, hud);
@@ -64,14 +64,14 @@ public class Game extends Canvas implements Runnable{
     long timer = System.currentTimeMillis();
     int frames = 0;
     
-    try {
+    try {//plays .wav file continuously 
       File soundFile = new File("LoweredAudio.wav");
-      AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
-      Clip clip = AudioSystem.getClip();
-      clip.open(audioIn);
-      clip.start();
-      clip.loop(Clip.LOOP_CONTINUOUSLY);
-    } catch (UnsupportedAudioFileException e) {
+      AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);//audio in from soundfile
+      Clip clip = AudioSystem.getClip();//clip from audio in
+      clip.open(audioIn);//open clip
+      clip.start();//start clip
+      clip.loop(Clip.LOOP_CONTINUOUSLY);//loop clip continuously
+    } catch (UnsupportedAudioFileException e) {//catching exceptions
       e.printStackTrace();
     } catch (IOException e) {
       e.printStackTrace();
@@ -79,8 +79,8 @@ public class Game extends Canvas implements Runnable{
       e.printStackTrace();
     }
     
-    while(running){
-     time += 1;
+    while(running){//while game is running
+     time += 1;//increment time by 1
      long now = System.nanoTime();
      delta += (now - lastTime) /ns;
      lastTime = now;
@@ -139,6 +139,6 @@ public class Game extends Canvas implements Runnable{
   }
   
   public static void main(String[] args) {
-    new Game();
+    new Game();//calls game method to star the game 
   }
 }

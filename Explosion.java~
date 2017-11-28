@@ -7,8 +7,6 @@ public class Explosion extends GameObject{
   
   public Explosion(int x, int y, ID id) {
    super(x, y, id);
-   
-   velY = 5;
   }
   
   public void update() {
@@ -25,6 +23,6 @@ public class Explosion extends GameObject{
   }
   
   public Rectangle getBounds() {
-    return new Rectangle(x, y, 4, 4); 
+    return new Rectangle(x, y, 32, 32); 
   } 
 }
