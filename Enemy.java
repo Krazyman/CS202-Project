@@ -5,12 +5,10 @@ public class Enemy extends GameObject {
   
   public Enemy(int x, int y, ID id) {
    super(x, y, id); 
-   
-   if(Game.time%4 == 0) {
    velY = 1;     
-   }
   }
-   /**
+  
+   /*
    * Update method for enemy movement
    */
   public void update() {

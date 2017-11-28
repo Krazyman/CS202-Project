@@ -42,12 +42,6 @@ public class HUD {
     value3 = BOSS3 * 2;
     value4 = BOSS4 * 2;    
     redValue = BOSS5 * 2;
-    if(HEALTH == 0) {
-     game.gameState = Game.STATE.Lose; 
-    } 
-    if(BOSS5 == 0 || BOSSPASS >= Game.HEIGHT) {
-     game.gameState = Game.STATE.Win; 
-    }
     
   }    
   

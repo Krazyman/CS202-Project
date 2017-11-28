@@ -49,6 +49,9 @@ public class Game extends Canvas implements Runnable{
     r= new Random(); // just to test
   }
   
+  /* Basically Main()
+   * 
+   * */
   public synchronized void start() {
     thread = new Thread(this);
     thread.start();
@@ -63,6 +66,11 @@ public class Game extends Canvas implements Runnable{
     }
   }
   
+  /* Loop checks whether 1 frame or 1/60 sec has passed to refresh the game
+   * Also checks whether 1 second has passed to refresh FPS counter
+   * While running, adds time to go through one lopp and adds to delta
+   * Once reaches 1 delta it can go forward one update
+   * */
   public void run(){
     this.requestFocus();
     long lastTime = System.nanoTime();
@@ -104,11 +112,10 @@ public class Game extends Canvas implements Runnable{
                gameState == STATE.Help ||
                gameState == STATE.Lose ||
                gameState == STATE.Win) {
-      time = 0;
+      time = 3500;
       handler.object.clear();
       spawner.update2();
-    }
-    
+    } 
   }
   
   private void draw() {

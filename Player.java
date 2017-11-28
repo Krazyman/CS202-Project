@@ -3,12 +3,15 @@ import java.awt.Rectangle;
 
 public class Player extends GameObject {
   
-  Handler handler;
+  private Game game;
+  private Handler handler;
   private int ammo = 5;
+  private int deathCounter = 1;
   
-  public Player(int x, int y, ID id, Handler handler) {
+  public Player(int x, int y, ID id, Handler handler, Game game) {
    super(x, y, id); 
    this.handler = handler;
+   this.game = game;
    
   }
   
@@ -92,14 +95,18 @@ public class Player extends GameObject {
   }
   
   public void death() {
+    
+    if(HUD.BOSS5 == 0 || HUD.BOSSPASS >= Game.HEIGHT) {
+     game.gameState = Game.STATE.Lose; 
+    }
     if (HUD.HEALTH <= 0) {
       for (int i=0; i<25; i++) {
        handler.addObject(new Explosion(x-i, y+i, ID.Explosion));
        handler.addObject(new Explosion(x+i, y-i, ID.Explosion));
        handler.addObject(new Explosion(x, y, ID.Explosion));
       }
-     handler.removeObject(this);
-     ammo = 5;
+      game.gameState = Game.STATE.Lose; 
+      ammo = 5;
     }
   }
   

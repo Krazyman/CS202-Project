@@ -21,7 +21,7 @@ public class Spawn {
   
   public void update() {
     if (game.gameState == Game.STATE.Game && play == 0) {
-     handler.addObject(new Player(Game.WIDTH/2, Game.HEIGHT/2, ID.Player, handler));
+     handler.addObject(new Player(Game.WIDTH/2, Game.HEIGHT/2, ID.Player, handler, game));
      play = 1;
      try {
        File soundFile = new File("LoweredAudio.wav");
