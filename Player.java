@@ -4,7 +4,7 @@ import java.awt.Rectangle;
 public class Player extends GameObject {
   
   Handler handler;
-  private int ammo = 2;
+  private int ammo = 5;
   
   public Player(int x, int y, ID id, Handler handler) {
    super(x, y, id); 
@@ -99,7 +99,7 @@ public class Player extends GameObject {
        handler.addObject(new Explosion(x, y, ID.Explosion));
       }
      handler.removeObject(this);
-     ammo = 2;
+     ammo = 5;
     }
   }
   

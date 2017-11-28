@@ -104,9 +104,7 @@ public class Game extends Canvas implements Runnable{
                gameState == STATE.Help ||
                gameState == STATE.Lose ||
                gameState == STATE.Win) {
-      time = 3500;
-      HUD.HEALTH = 100;
-      HUD.BULLET = 100;
+      time = 0;
       handler.object.clear();
       spawner.update2();
     }

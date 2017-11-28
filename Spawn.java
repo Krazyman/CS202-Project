@@ -61,6 +61,14 @@ public class Spawn {
    if(game.gameState != Game.STATE.Game && play == 1) {
       play = 0;
       clip.stop();
+      count = 1;
+      HUD.HEALTH = 100;
+      HUD.BULLET = 100;
+      HUD.BOSS1 = 100;
+      HUD.BOSS2 = 100;
+      HUD.BOSS3 = 100;
+      HUD.BOSS4 = 100;
+      HUD.BOSS5 = 100;
     } 
   }
   

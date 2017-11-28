@@ -23,8 +23,14 @@ public class KeyInput extends KeyAdapter{
     if(game.gameState == Game.STATE.Menu){
       if(key == KeyEvent.VK_H){game.gameState = Game.STATE.Help;}
       if(key == KeyEvent.VK_P){game.gameState = Game.STATE.Game;}}
-   if(game.gameState == Game.STATE.Help){
-        if(key == KeyEvent.VK_B){game.gameState = Game.STATE.Menu;}}
+   if(game.gameState != Game.STATE.Menu){
+      if(key == KeyEvent.VK_B){game.gameState = Game.STATE.Menu;}}
+    if (key == KeyEvent.VK_ESCAPE)
+    {System.exit(0);}
+    if(game.gameState == Game.STATE.Menu){
+      if(key == KeyEvent.VK_H){game.gameState = Game.STATE.Help;}}
+    if (game.gameState != Game.STATE.Game){
+      if(key == KeyEvent.VK_P){game.gameState = Game.STATE.Game;}}
     
     for(int i=0; i<handler.object.size(); i++){
       GameObject tempObject = handler.object.get(i);
