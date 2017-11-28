@@ -5,10 +5,12 @@ import java.awt.event.KeyEvent;
 
 public class KeyInput extends KeyAdapter{
   private Handler handler;
+  private Game game;
   private boolean[] keyDown = new boolean[4]; //SK FIX
   
-  public KeyInput(Handler handler){
+  public KeyInput(Game game, Handler handler){
     this.handler = handler;
+    this.game = game;
     keyDown[0]=false; //SK FIX up
     keyDown[1]=false; //SK FIX down
     keyDown[2]=false; //SK FIX right
@@ -17,6 +19,13 @@ public class KeyInput extends KeyAdapter{
   
   public void keyPressed(KeyEvent e){
     int key = e.getKeyCode();
+    
+    if(game.gameState == Game.STATE.Menu){
+      if(key == KeyEvent.VK_H){game.gameState = Game.STATE.Help;}
+      if(key == KeyEvent.VK_P){game.gameState = Game.STATE.Game;}}
+   if(game.gameState == Game.STATE.Help){
+        if(key == KeyEvent.VK_B){game.gameState = Game.STATE.Menu;}}
+    
     for(int i=0; i<handler.object.size(); i++){
       GameObject tempObject = handler.object.get(i);
       if(tempObject.id == ID.Player) {

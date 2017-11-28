@@ -3,6 +3,9 @@ import java.awt.Color;
 import java.awt.Font;
 
 public class HUD {
+  
+  String timer;
+  double copy;
  
   public static int HEALTH = 100;
   public static int BULLET = 100;
@@ -73,7 +76,8 @@ public class HUD {
    g.drawRect(15, 50, 200, 32);
    
    Font clock = new Font("century gothic" , 1, 50);
-   String timer = String.format("%.2f",Game.time/120);
+   copy = Game.time;
+   timer = String.format("%.2f",copy/120);
    g.setColor(Color.red);
    g.setFont(clock);
    g.drawString(timer,300, 50);

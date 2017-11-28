@@ -12,7 +12,7 @@ import java.io.*;
 
 public class Game extends Canvas implements Runnable{
   
-  public static final int WIDTH = 800, HEIGHT = 800;  
+  public static final int WIDTH = 800, HEIGHT = 800; 
   
   public Thread thread;
   private boolean running = false;
@@ -32,7 +32,7 @@ public class Game extends Canvas implements Runnable{
     Lose
   }  
   
-  public static final int bossTime = 1;
+  public static final int bossTime = 3600;
   public static double time = 0;
 
   public STATE gameState = STATE.Menu;
@@ -40,19 +40,15 @@ public class Game extends Canvas implements Runnable{
   public Game() {
     handler = new Handler();
     menu = new Menu(this);
-    this.addKeyListener(new KeyInput(handler));
+    this.addKeyListener(new KeyInput(this, handler));
     
     new Window(WIDTH, HEIGHT, "SpaceShooter", this);
     
     hud = new HUD();
-    spawner = new Spawn(handler, hud);
+    spawner = new Spawn(this, handler, hud);
     hud.update();
 
     r= new Random(); // just to test
-
-    if(gameState == STATE.Game) {
-      handler.addObject(new Player(WIDTH/2, HEIGHT/2, ID.Player, handler));
-    }
   }
   
   public synchronized void start() {
@@ -78,7 +74,6 @@ public class Game extends Canvas implements Runnable{
     long timer = System.currentTimeMillis();
     int frames = 0;
     while(running){
-     time += 1;
      long now = System.nanoTime();
      delta += (now - lastTime) /ns;
      lastTime = now;
@@ -105,24 +100,28 @@ public class Game extends Canvas implements Runnable{
     menu.update();
     
     if(gameState == STATE.Game) {
-        hud.update();
-        spawner.update();
+      time += 1;
+      hud.update();
+      spawner.update();
         
-        try {
-          File soundFile = new File("LoweredAudio.wav");
-          AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
-          Clip clip = AudioSystem.getClip();
-          clip.open(audioIn);
-          clip.start();
-          clip.loop(Clip.LOOP_CONTINUOUSLY);
-        } catch (UnsupportedAudioFileException e) {
-          e.printStackTrace();
-        } catch (IOException e) {
-          e.printStackTrace();
-        } catch (LineUnavailableException e) {
-          e.printStackTrace();
-        }  
-    }
+//        try {
+//          File soundFile = new File("LoweredAudio.wav");
+//          AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
+//          Clip clip = AudioSystem.getClip();
+//          clip.open(audioIn);
+//          clip.start();
+//          clip.loop(Clip.LOOP_CONTINUOUSLY);
+//        } catch (UnsupportedAudioFileException e) {
+//          e.printStackTrace();
+//        } catch (IOException e) {
+//          e.printStackTrace();
+//        } catch (LineUnavailableException e) {
+//          e.printStackTrace();
+//        }  
+    } else if (gameState == STATE.Menu ||
+               gameState == STATE.Help ||
+               gameState == STATE.Lose ||
+               gameState == STATE.Win) {time = 3500;}
     
   }
   

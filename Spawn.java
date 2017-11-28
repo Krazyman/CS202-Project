@@ -3,18 +3,24 @@ import java.util.Random;
 public class Spawn {
   
   private Handler handler;
+  private Game game;
   private HUD hud;
   private Random r; // just to test
   private int count = 1;
+  private int play = 0;
   
-  public Spawn(Handler handler, HUD hud) {
+  public Spawn(Game game, Handler handler, HUD hud) {
+   this.game = game;
    this.handler = handler; 
    this.hud = hud;
-   
    r = new Random();
   }
   
   public void update() {
+    if (game.gameState == Game.STATE.Game && play == 0) {
+     handler.addObject(new Player(Game.WIDTH/2, Game.HEIGHT/2, ID.Player, handler));
+     play = 1;
+    }
     spawnStar(1);
     despawnStar();
     despawnMeteor();
@@ -26,8 +32,12 @@ public class Spawn {
       despawnExplosion();
     }
     if (Game.time > Game.bossTime && count == 1) {
-     handler.addObject(new Enemy(600, 0, ID.Enemy)); 
+     handler.addObject(new Enemy(400, 0, ID.Enemy)); 
      count = 0;
+    }
+    
+    if(game.gameState != Game.STATE.Game && play == 1) {
+      play = 0;
     }
   }
   

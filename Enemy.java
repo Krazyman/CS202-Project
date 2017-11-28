@@ -6,7 +6,9 @@ public class Enemy extends GameObject {
   public Enemy(int x, int y, ID id) {
    super(x, y, id); 
    
-   velY = 1;
+   if(Game.time%4 == 0) {
+   velY = 1;     
+   }
   }
   
    public Rectangle getBounds() {
@@ -14,7 +16,7 @@ public class Enemy extends GameObject {
   }
   
   public void update() {
-    x += Math.cos(-Game.time*.0025)*8 + 0.5;
+    x += Math.cos(-Game.time*.025)*8 + 0.5;
     y += velY;
     
     x = Game.clamp(x, 0, Game.WIDTH-128);
